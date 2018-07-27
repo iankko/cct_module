@@ -33,6 +33,12 @@ function configure_https() {
       key_password="<credential-reference clear-text=\"${HTTPS_KEY_PASSWORD}\"/>"
     fi
 
+    local enabled_protocols="protocols=\"${HTTPS_PROTOCOLS:-[\"TLSv1.2\",\"TLSv1.3\"]}\""
+
+    if [ -n "${HTTPS_CIPHER_SUITES}" ]; then
+      enabled_cipher_suites="cipher-suite-filter=\"${HTTPS_CIPHER_SUITES}\""
+    fi
+
     tls="<tls>\n\
         <key-stores>\n\
             <key-store name=\"LocalhostKeyStore\">\n\
@@ -47,7 +53,7 @@ function configure_https() {
             </key-manager>\n\
         </key-managers>\n\
         <server-ssl-contexts>\n\
-            <server-ssl-context name=\"LocalhostSslContext\" key-manager=\"LocalhostKeyManager\"/>\n\
+            <server-ssl-context name=\"LocalhostSslContext\" $enabled_protocols $enabled_cipher_suites key-manager=\"LocalhostKeyManager\"/>\n\
         </server-ssl-contexts>\n\
     </tls>"
 
