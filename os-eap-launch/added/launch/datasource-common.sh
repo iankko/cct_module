@@ -297,11 +297,6 @@ function generate_external_datasource() {
            </validation>"
   fi
 
-  ds="$ds
-         <timeout>
-           <blocking-timeout-wait-millis>600000</blocking-timeout-wait-millis>
-         </timeout>"
-
   if [ -n "$NON_XA_DATASOURCE" ] && [ "$NON_XA_DATASOURCE" = "true" ]; then
     ds="$ds
            </datasource>"
