@@ -260,6 +260,7 @@ function generate_external_datasource() {
       ds="$ds
              <max-pool-size>$max_pool_size</max-pool-size>"
     fi
+
     if [ -n "$NON_XA_DATASOURCE" ] && [ "$NON_XA_DATASOURCE" = "true" ]; then
       ds="$ds
              </pool>"
@@ -295,6 +296,11 @@ function generate_external_datasource() {
              <exception-sorter class-name=\"${sorter}\"></exception-sorter>
            </validation>"
   fi
+
+  ds="$ds
+         <timeout>
+           <blocking-timeout-wait-millis>600000</blocking-timeout-wait-millis>
+         </timeout>"
 
   if [ -n "$NON_XA_DATASOURCE" ] && [ "$NON_XA_DATASOURCE" = "true" ]; then
     ds="$ds
