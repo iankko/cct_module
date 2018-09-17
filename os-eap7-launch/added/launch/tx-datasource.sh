@@ -38,7 +38,7 @@ function clearTxDatasourceEnv() {
 function generate_tx_datasource() {
 
   ds="                  <datasource jta=\"false\" jndi-name=\"${2}ObjectStore\" pool-name=\"${1}ObjectStorePool\" enabled=\"true\">
-                      <connection-url>jdbc:${8}://${5}:${6}/${7}?connectTimeout=600000&amp;socketTimeout=600000</connection-url>
+                      <connection-url>jdbc:${8}://${5}:${6}/${7}?connectTimeout=600000\&amp\;socketTimeout=600000</connection-url>
                       <driver>${8}</driver>"
       if [ -n "$tx_isolation" ]; then
         ds="$ds 

@@ -217,7 +217,7 @@ function generate_external_datasource() {
 
   if [ -n "$NON_XA_DATASOURCE" ] && [ "$NON_XA_DATASOURCE" = "true" ]; then
     ds="<datasource jta=\"${jta}\" jndi-name=\"${jndi_name}\" pool-name=\"${pool_name}\" enabled=\"true\" use-java-context=\"true\">
-          <connection-url>${url}?connectTimeout=600000&amp;socketTimeout=600000</connection-url>
+          <connection-url>${url}?connectTimeout=600000\&amp\;socketTimeout=600000</connection-url>
           <driver>$driver</driver>"
   else
     ds=" <xa-datasource jndi-name=\"${jndi_name}\" pool-name=\"${pool_name}\" use-java-context=\"true\" enabled=\"true\">"
@@ -318,7 +318,7 @@ function generate_default_datasource() {
 
   if [ -n "$url" ]; then
     ds="$ds
-           <connection-url>${url}?connectTimeout=600000&amp;socketTimeout=600000</connection-url>"
+           <connection-url>${url}?connectTimeout=600000\&amp\;socketTimeout=600000</connection-url>"
   else
     ds="$ds
            <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>"
@@ -527,7 +527,8 @@ function inject_datasource() {
     datasource=$(generate_datasource "${service,,}-${prefix}" "$jndi" "$username" "$password" "$host" "$port" "$database" "$checker" "$sorter" "$driver" "$service_name" "$jta" "$validate" "$url")
 
     if [ -n "$datasource" ]; then
-      sed -i "s|<!-- ##DATASOURCES## -->|${datasource}\n<!-- ##DATASOURCES## -->|" $CONFIG_FILE
+      #sed -i "s|<!-- ##DATASOURCES## -->|${datasource}\n<!-- ##DATASOURCES## -->|" $CONFIG_FILE
+      sed -i "s|<!-- ##DATASOURCES## -->|${datasource}\n|" $CONFIG_FILE
     fi
   fi
 }
