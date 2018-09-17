@@ -58,7 +58,8 @@ function inject_datasources_common() {
 
   tx_datasource="$(inject_tx_datasource)"
   if [ -n "$tx_datasource" ]; then
-    sed -i "s|<!-- ##DATASOURCES## -->|${tx_datasource}<!-- ##DATASOURCES## -->|" $CONFIG_FILE
+    #sed -i "s|<!-- ##DATASOURCES## -->|${tx_datasource}<!-- ##DATASOURCES## -->|" $CONFIG_FILE
+    sed -i "s|<!-- ##DATASOURCES## -->|${tx_datasource}|" $CONFIG_FILE
   fi
 
   inject_external_datasources
