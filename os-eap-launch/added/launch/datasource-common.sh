@@ -297,6 +297,12 @@ function generate_external_datasource() {
            </validation>"
   fi
 
+  ds="$ds
+        <timeout>
+            <allocation-retry>120</allocation-retry>
+            <allocation-retry-wait-millis>5000</allocation-retry-wait-millis>
+        </timeout>"
+
   if [ -n "$NON_XA_DATASOURCE" ] && [ "$NON_XA_DATASOURCE" = "true" ]; then
     ds="$ds
            </datasource>"
